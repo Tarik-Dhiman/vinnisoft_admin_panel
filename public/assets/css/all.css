@@ -1,0 +1,10 @@
+/* .sidebar-nav ul .sidebar-item .sidebar-link:hover {
+    border-left: 3px solid #009efb;
+    color: #009efb !important;
+    .span.hide-menu.text-secondary{
+        color: aqua;
+    }
+} */
+.navbar-header {
+    background: #fff;
+}
