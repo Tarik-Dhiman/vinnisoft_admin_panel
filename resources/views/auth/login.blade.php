@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         * {
             margin: 0;
@@ -21,68 +22,6 @@
             overflow: hidden;
         }
 
-        .container {
-            position: relative;
-            z-index: 1;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 30px;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 350px;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        .alert {
-            background: rgba(255, 0, 0, 0.8);
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 8px;
-            outline: none;
-            font-size: 16px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            background: #ff4081;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #e91e63;
-        }
-
-        a {
-            display: block;
-            margin-top: 15px;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
         .wave {
             position: fixed;
             bottom: 0;
@@ -94,44 +33,68 @@
         }
 
         @keyframes wave-animation {
-            from {
-                background-position-x: 0;
-            }
-            to {
-                background-position-x: 1000px;
-            }
+            from { background-position-x: 0; }
+            to { background-position-x: 1000px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Login</h2>
-
-        @if(session('success'))
-            <p class="alert">{{ session('success') }}</p>
-        @endif
-
-        @if(session('error'))
-            <p class="alert">{{ session('error') }}</p>
-        @endif
-
-        @if ($errors->any())
-            <div class="alert">
-                @foreach ($errors->all() as $error)
-                    <p>{{ $error }}</p>
-                @endforeach
+    <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="row justify-content-center w-100">
+            <div class="col-md-8 col-lg-6 col-xxl-3 auth-card">
+                <div class="card mb-0">
+                    <div class="card-body text-center">
+                        <a href="#" class="text-nowrap logo-img d-block py-3 w-100">
+                            <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <span>
+                                <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            </span>
+                        </a>
+                        <p class="fw-bold font-14">Your Social Campaigns</p>
+                        
+                        @if(session('success'))
+                            <p class="alert alert-success">{{ session('success') }}</p>
+                        @endif
+                        @if(session('error'))
+                            <p class="alert alert-danger">{{ session('error') }}</p>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                @foreach ($errors->all() as $error)
+                                    <p>{{ $error }}</p>
+                                @endforeach
+                            </div>
+                        @endif
+                        
+                        <form action="{{ route('login') }}" method="POST">
+                            @csrf
+                            <div class="mb-3 text-start">
+                                <label class="form-label">Username</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="mb-4 text-start">
+                                <label class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Remember this Device</label>
+                                </div>
+                                <a href="{{ route('password.request') }}" class="text-info font-14">Forgot Password?</a>
+                            </div>
+                            <button type="submit" class="btn btn-info w-100 py-2 mb-4">Login</button>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <p class="mb-0">New to Monster?</p>
+                                <a href="{{ route('register') }}" class="text-info ms-2">Create an account</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-        @endif
-
-        <form action="{{ route('login') }}" method="POST">
-            @csrf
-            <input type="email" name="email" required placeholder="Email">
-            <input type="password" name="password" required placeholder="Password">
-            <button type="submit">Login</button>
-        </form>
-        <a href="{{ route('register') }}">Register</a>
+        </div>
     </div>
-
     <div class="wave"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

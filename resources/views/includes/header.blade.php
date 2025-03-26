@@ -59,25 +59,27 @@
             <!-- User profile and search -->
             <!-- ============================================================== -->
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="navbarDropdown" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('assets/images/1.jpg') }}" alt="user" class="profile-pic me-2" />
-                    {{ Auth::user()->name }} 
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li>
-                        <a class="dropdown-item" href="#">Profile</a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="dropdown-item">Logout</button>
-                        </form>
-                    </li>
-                </ul>
+                @if(Auth::check()) 
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ asset('assets/images/1.jpg') }}" alt="user" class="profile-pic me-2" />
+                        {{ Auth::user()->name }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('profile.index') }}">Profile</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                @endif
             </li>
 
           </ul>
